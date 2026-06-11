@@ -1,0 +1,4 @@
+package com.example.demo.application.controllers.dashboard.tools;
+
+public class Register {
+}

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.application.controllers.dashboard.Dashboard">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #d9d9d9;">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="60.0" prefWidth="600.0" style="-fx-border-color: black;">
+               <children>
+                  <Label alignment="CENTER" text="ARMAZÉM">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Droid Sans Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="550.0" prefWidth="800.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="200.0">
+                     <HBox.margin>
+                        <Insets bottom="25.0" left="30.0" top="25.0" />
+                     </HBox.margin>
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#cadastrar" prefWidth="200.0" style="-fx-border-color: black;" text="Cadastrar produto">
+                           <font>
+                              <Font name="Droid Sans Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#adicionar" prefWidth="200.0" style="-fx-border-color: black;" text="Adicionar estoque">
+                           <font>
+                              <Font name="Droid Sans Bold" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#remover" prefWidth="200.0" style="-fx-border-color: black;" text="Remover estoque">
+                           <font>
+                              <Font name="Droid Sans Bold" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#verificar" prefWidth="200.0" style="-fx-border-color: black;" text="Verificar estoque">
+                           <font>
+                              <Font name="Droid Sans Bold" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" prefHeight="370.0" prefWidth="100.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#sair" prefWidth="200.0" style="-fx-border-color: black;" text="Sair">
+                                 <font>
+                                    <Font name="Droid Sans Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="490.0">
+                     <HBox.margin>
+                        <Insets bottom="25.0" left="50.0" top="25.0" />
+                     </HBox.margin>
+                     <children>
+                        <HBox prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #bbbaba; -fx-border-color: black;">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="164.0">
+                                 <children>
+                                    <Label text="CÓDIGO">
+                                       <font>
+                                          <Font name="Droid Sans Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="164.0">
+                                 <children>
+                                    <Label text="PRODUTO">
+                                       <font>
+                                          <Font name="Droid Sans Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="164.0">
+                                 <children>
+                                    <Label text="QUANTIDADE">
+                                       <font>
+                                          <Font name="Droid Sans Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <ListView fx:id="Lista" prefHeight="451.0" prefWidth="200.0" style="-fx-border-color: black;">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </ListView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

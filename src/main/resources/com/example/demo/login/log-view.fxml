@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.application.controllers.login.Log">
+   <children>
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #d9d9d9;">
+         <children>
+            <VBox maxWidth="-Infinity" prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <Label text="Login">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="2.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Droid Sans Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField style="-fx-border-color: black;" />
+                  <Label text="Senha">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="2.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Droid Sans Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField style="-fx-border-color: black;" />
+                  <HBox alignment="TOP_CENTER" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#enter" prefWidth="300.0" style="-fx-background-color: #dcdcdc; -fx-border-color: black;" text="ENTRAR">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Droid Sans Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" maxWidth="-Infinity" prefWidth="300.0" text="Login ou senha incorretos!" textAlignment="CENTER" textFill="#e10c0c" visible="false">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Droid Sans Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
