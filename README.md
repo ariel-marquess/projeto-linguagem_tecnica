@@ -100,6 +100,11 @@ Desenvolver uma aplicação para gerenciamento de estoque utilizando Java e MySQ
 - Validação de dados;
 - Operações CRUD (Create, Read, Update e Delete).
 
+## Protótipo
+
+O protótipo da interface do Sistema de Armazém foi desenvolvido utilizando o Figma e pode ser acessado pelo link abaixo:
+- Projeto no Figma: https://www.figma.com/design/D4wmkPsLRWY5WEfd3v5kv3/Armazem?node-id=0-1&t=Npr7qKqwYQ9u5Sb1-1
+
 ## Integrantes
 
 - Willian
