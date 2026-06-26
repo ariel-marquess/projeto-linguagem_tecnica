@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.PasswordField?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.application.controllers.login.Log">
    <children>
@@ -23,7 +24,7 @@
                         <Font name="Droid Sans Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField style="-fx-border-color: black;" />
+                  <TextField style="-fx-border-color: black;" fx:id="txtUser"/>
                   <Label text="Senha">
                      <VBox.margin>
                         <Insets bottom="5.0" left="2.0" top="10.0" />
@@ -32,7 +33,7 @@
                         <Font name="Droid Sans Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField style="-fx-border-color: black;" />
+                  <PasswordField style="-fx-border-color: black;" fx:id="txtPassword"/>
                   <HBox alignment="TOP_CENTER" prefWidth="200.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#enter" prefWidth="300.0" style="-fx-background-color: #dcdcdc; -fx-border-color: black;" text="ENTRAR">
@@ -45,7 +46,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Label alignment="CENTER" maxWidth="-Infinity" prefWidth="300.0" text="Login ou senha incorretos!" textAlignment="CENTER" textFill="#e10c0c" visible="false">
+                  <Label alignment="CENTER" maxWidth="-Infinity" prefWidth="300.0" text="Login ou senha incorretos!" textAlignment="CENTER" textFill="#e10c0c" visible="false" fx:id="loginError">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>

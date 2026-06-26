@@ -5,14 +5,18 @@ public class Stocky {
     private int id;
     private String nome;
     private int quantidade;
-    private double valorUnitario;
+    private double valor;
+
+    public Stocky() {
+        // Construtor vazio pra o DAO
+    }
 
     // construtor
     public Stocky (int id, String nome, int quantidade, double valorUnitario) {
         this.id = id;
         this.nome = nome;
         this.quantidade = quantidade;
-        this.valorUnitario = valorUnitario;
+        this.valor = valorUnitario;
     }
 
     //getters
@@ -28,8 +32,8 @@ public class Stocky {
         return quantidade;
     }
 
-    public double getValorUnitario() {
-        return valorUnitario;
+    public double getValor() {
+        return valor;
     }
 
     // setters
@@ -45,8 +49,8 @@ public class Stocky {
         this.quantidade = quantidade;
     }
 
-    public void setValorUnitario(double valorUnitario) {
-        this.valorUnitario = valorUnitario;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     // um metodo que exibe os dados
@@ -54,7 +58,7 @@ public class Stocky {
         System.out.println("ID: " + id);
         System.out.println("Nome: " + nome);
         System.out.println("Quantidade: " + quantidade);
-        System.out.println("Valor Unitário: R$ " + valorUnitario);
+        System.out.println("Valor Unitário: R$ " + valor);
     }
 
 
