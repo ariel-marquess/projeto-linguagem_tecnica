@@ -107,26 +107,28 @@
                                     <Insets bottom="5.0" top="5.0" />
                                  </padding>
                               </Button>
-                              <VBox fx:id="erroContainer" alignment="BOTTOM_LEFT" prefHeight="392.0" prefWidth="100.0" visible="false">
-                                 <children>
-                                    <Label text="Erro" textFill="#e10c0c">
-                                       <font>
-                                          <Font name="Droid Sans Bold" size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="3.0" left="2.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <HBox alignment="CENTER" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #eaeaea;">
-                                       <children>
-                                          <Label fx:id="erroMessage" alignment="CENTER" maxWidth="-Infinity" prefWidth="200.0" text="Problema" textAlignment="CENTER" textFill="#e10c0c">
-                                             <font>
-                                                <Font name="Droid Sans Bold" size="14.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                 </children>
+                           <VBox fx:id="erroContainer" alignment="TOP_LEFT" prefWidth="250.0" visible="false" fillWidth="true">
+                              <children>
+                                 <Label text="Erro" textFill="#e10c0c">
+                                    <font>
+                                       <Font name="Droid Sans Bold" size="16.0" />
+                                    </font>
+                                    <VBox.margin>
+                                       <Insets bottom="3.0" left="2.0" />
+                                    </VBox.margin>
+                                 </Label>
+                                 <HBox alignment="TOP_LEFT" prefWidth="250.0" style="-fx-background-color: #eaeaea;">
+                                    <children>
+                                       <Label fx:id="erroMessage"
+                                              wrapText="true"
+                                              maxWidth="Infinity"
+                                              textAlignment="LEFT"
+                                              alignment="TOP_LEFT"
+                                              textFill="#e10c0c"
+                                              HBox.hgrow="ALWAYS" />
+                                    </children>
+                                 </HBox>
+                              </children>
                               </VBox>
                            </children>
                         </VBox>

@@ -53,49 +53,59 @@ public class Register {
         codigo.setText(String.format("%04d", lastId + 1));
     }
 
-    private void salvarProduto() {
+    private boolean salvarProduto() {
         hideError();
-        String Nome = nome.getText();
-        String Quantidade = quantidade.getText();
-        String Valor = valor.getText().replace(",",".");
 
-        //verifica se há algum erro no preenchimento de dados e faz o tratamento dos dados
+        String Nome = nome.getText().trim();
+        String Quantidade = quantidade.getText().trim();
+        String Valor = valor.getText().trim().replace(",", ".");
+
         try {
             if (Nome.isEmpty() || Quantidade.isEmpty() || Valor.isEmpty()) {
                 throw new Exception("Todos os campos devem ser preenchidos.");
-                }
+            }
 
             int FQuantidade = Integer.parseInt(Quantidade);
             double FValor = Double.parseDouble(Valor);
+
+            if (FQuantidade < 0) {
+                throw new Exception("Quantidade não pode ser negativa.");
+            }
+            if (FValor < 0) {
+                throw new Exception("Valor não pode ser negativo.");
+            }
+
             com.example.demo.models.Stocky novoProduto = new com.example.demo.models.Stocky(0, Nome, FQuantidade, FValor);
             stockyDao.insert(novoProduto);
+            return true;
 
-        } catch (NumberFormatException e){
-            // se o usuário digitar caracteres invalidos  nos campos de numero, mostra um erro
+        } catch (NumberFormatException e) {
             showError("Os campos de quantidade e valor devem conter apenas números.");
-        }
-        catch (Exception e) {
+            return false;
+
+        } catch (Exception e) {
             showError(e.getMessage());
+            return false;
         }
-
-
     }
 
 
 
     public void salvarEContinuar() {
         // salva o produto e atualiza a pagína atual.
-        salvarProduto();
-        initialize();
-        nome.clear();
-        quantidade.clear();
-        valor.clear();
+        if(salvarProduto()) {
+            initialize();
+            nome.clear();
+            quantidade.clear();
+            valor.clear();
+        }
     }
 
     public void salvarESair() throws Exception{
         // salva o produto e volta para a tela de dashboard.
-        salvarProduto();
-        nome.getScene().getWindow().hide();
+        if (salvarProduto()) {
+            nome.getScene().getWindow().hide();
+        }
     }
 
     public void sair() {

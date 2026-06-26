@@ -86,23 +86,46 @@ public class Dashboard {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        // showAndWait bloqueia ate fechar a janela de cadastro
+        // bloqueia ate fechar a janela de cadastro
         stage.showAndWait();
-        // atualiza a lista apos fechar o cadastro para refletir os novos produtos
+        // atualiza a lista apos fechar o cadastro pra mostrar os novos produtos
         atualizarLista();
     }
 
-    public void adicionar() {
+    public void adicionar() throws IOException {
         // Deve abrir a tela de adicionar produtos
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/dashboard/tools/add-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.showAndWait();
+        atualizarLista();
+
     }
 
-    public void remover() {
+    public void remover() throws IOException{
         // Deve abrir a tela de remover produtos
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/dashboard/tools/remove-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.showAndWait();
+        atualizarLista();
+
     }
 
-    public void verificar() {
+    public void verificar() throws IOException{
         // Deve abrir a tela de verificar produtos
         // Essa está referenciada pela classe Check na pasta check
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/dashboard/tools/check/check-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.showAndWait();
+        atualizarLista();
     }
 
     public void sair() throws IOException {
