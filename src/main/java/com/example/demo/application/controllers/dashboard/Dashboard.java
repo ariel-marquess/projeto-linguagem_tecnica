@@ -65,7 +65,7 @@ public class Dashboard {
                     setGraphic(null); // Não mostra nada para células vazias.
                 } else {
                     // Para células com dados, define o texto de cada "coluna".
-                    codigo.setText(String.valueOf(item.getId()));
+                    codigo.setText(String.format("%04d", item.getId()));
                     produto.setText(item.getNome());
                     quantidade.setText(String.valueOf(item.getQuantidade()));
 

@@ -1,6 +1,5 @@
 package com.example.demo.application.controllers.dashboard.tools;
 
-import com.example.demo.dao.DaoFactory;
 import com.example.demo.dao.StockyDao;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -53,7 +52,7 @@ public class Register {
         codigo.setText(String.format("%04d", lastId + 1));
     }
 
-    private boolean salvarProduto() {
+    private boolean salvarMovimento() {
         hideError();
 
         String Nome = nome.getText().trim();
@@ -93,7 +92,7 @@ public class Register {
 
     public void salvarEContinuar() {
         // salva o produto e atualiza a pagína atual.
-        if(salvarProduto()) {
+        if(salvarMovimento()) {
             initialize();
             nome.clear();
             quantidade.clear();
@@ -103,7 +102,7 @@ public class Register {
 
     public void salvarESair() throws Exception{
         // salva o produto e volta para a tela de dashboard.
-        if (salvarProduto()) {
+        if (salvarMovimento()) {
             nome.getScene().getWindow().hide();
         }
     }

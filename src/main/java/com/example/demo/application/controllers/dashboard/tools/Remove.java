@@ -5,15 +5,51 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import com.example.demo.dao.DaoFactory;
+import com.example.demo.dao.StockyDao;
+import com.example.demo.models.Stocky;
+
+
 
 public class Remove {
     public MenuButton menu;  // Lista suspensa de produtos
     public TextField quantidade;
     public TextField valor;
     public TextField codigo;
-    
+
+    private StockyDao stockyDao;
+    private Integer selectedId = null;
+
     public Label erroMessage;
     public VBox erroContainer;
+
+
+    private boolean salvarMovimento() {
+        hideError();
+
+        if (selectedId == null) {
+            showError("Selecione um produto.");
+            return false;
+        }
+
+        String qtd = quantidade.getText().trim();
+        try {
+            if (qtd.isEmpty()) throw new Exception("Informe a quantidade.");
+            int q = Integer.parseInt(qtd);
+            if (q <= 0) throw new Exception("Quantidade deve ser maior que zero.");
+
+            stockyDao.removeQuantidade(selectedId, q);
+            return true;
+
+        } catch (NumberFormatException nfe) {
+            showError("Quantidade deve conter apenas números inteiros.");
+            return false;
+
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+            return false;
+        }
+    }
 
     private void hideError(){
         erroContainer.setVisible(false);
@@ -31,19 +67,43 @@ public class Remove {
 
     @FXML
     public void initialize() {
-        // Deve carregar todos os nomes dos produtos na lista suspensa.
-        // Por padrão os valores de "valor" e "codigo" devem ser "R$ 0,00" e "0000", respectivamente.
+        stockyDao = DaoFactory.createStockyDao();
+
+        menu.getItems().clear();
+        for (Stocky p : stockyDao.allProdutos()) {
+            String rotulo = String.format("%04d", p.getId()) + " - " + p.getNome();
+            javafx.scene.control.MenuItem item = new javafx.scene.control.MenuItem(rotulo);
+            item.setOnAction(e -> {
+                hideError();
+                selectedId = p.getId();
+                menu.setText(p.getNome());
+                codigo.setText(String.format("%04d", p.getId()));
+                valor.setText(String.format("R$ %.2f", p.getValor()));
+            });
+            menu.getItems().add(item);
+        }
+
+        menu.setText("Selecionar produto");
+        codigo.setText("0000");
+        valor.setText("R$ 0,00");
     }
 
     public void salvarEContinuar() {
-        // Deve remover o produto e atualizar a página atual (são as mesmas especificações de sua homóloga na classe Register).
+        if (salvarMovimento()) {
+            quantidade.clear();
+            selectedId = null;
+            menu.setText("Selecionar produto");
+            codigo.setText("0000");
+            valor.setText("R$ 0,00");
+        }
     }
 
     public void salvarESair() {
-        // Deve remover o produto e voltar para a tela de dashboard.
-    }
+        if (salvarMovimento()) {
+            menu.getScene().getWindow().hide();
+        }    }
 
     public void sair() {
-        // Deve voltar para a tela de dashboard.
+        menu.getScene().getWindow().hide();
     }
 }

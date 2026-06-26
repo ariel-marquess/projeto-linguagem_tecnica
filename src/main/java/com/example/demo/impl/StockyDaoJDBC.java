@@ -117,7 +117,7 @@ public class StockyDaoJDBC implements StockyDao {
 
         try{
             // Lista ordenada por nome para facilitar a leitura nas telas.
-            st = conn.prepareStatement("SELECT id, nome, quantidade, valor FROM " + TABLE + " ORDER BY nome");
+            st = conn.prepareStatement("SELECT id, nome, quantidade, valor FROM " + TABLE + " ORDER BY id");
             rs = st.executeQuery();
 
             List<Stocky> produtos = new ArrayList<>();
