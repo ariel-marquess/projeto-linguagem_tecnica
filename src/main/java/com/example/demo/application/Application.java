@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 public class Application extends javafx.application.Application {
     public static void main(String[] args) {
         // inicia a aplicação
+        launch(args);
     }
 
     @Override
