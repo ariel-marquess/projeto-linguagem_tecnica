@@ -39,6 +39,7 @@ public class Register {
 
     private void showError(String mensagem){
         erroContainer.setVisible(true);
+        erroMessage.setText(mensagem);
         erroMessage.setVisible(true);
     }
 

@@ -257,7 +257,9 @@ public class StockyDaoJDBC implements StockyDao {
     @Override
     public void createStocky(){
         Statement st = null;
+        PreparedStatement check = null;
         PreparedStatement seed = null;
+        ResultSet rs = null;
 
         try {
             // Cria a tabela somente se ela ainda nao existir no banco configurado.
@@ -271,18 +273,33 @@ public class StockyDaoJDBC implements StockyDao {
                     + "UNIQUE KEY uk_stocky_nome (nome)"
                     + ")");
 
-            // INSERT IGNORE adiciona dados iniciais sem duplicar produtos ja existentes.
-            seed = conn.prepareStatement(
-                    "INSERT IGNORE INTO " + TABLE + " (nome, quantidade, valor) VALUES "
-                            + "('Arroz', 20, 5.99), "
-                            + "('Feijao', 15, 7.50), "
-                            + "('Macarrao', 30, 3.25)"
-            );
-            seed.executeUpdate();
+            // Verifica se a tabela esta vazia para evitar avancos no AUTO_INCREMENT a cada inicializacao.
+            check = conn.prepareStatement("SELECT COUNT(*) FROM " + TABLE);
+            rs = check.executeQuery();
+            int total = 0;
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+            DB.closeResultSet(rs);
+            DB.closeStatement(check);
+
+            if (total == 0) {
+                // Insere os dados iniciais apenas uma vez (sem IGNORE), quando a tabela esta vazia.
+                seed = conn.prepareStatement(
+                        "INSERT INTO " + TABLE + " (nome, quantidade, valor) VALUES "
+                                + "('Arroz', 20, 5.99), "
+                                + "('Feijao', 15, 7.50), "
+                                + "('Macarrao', 30, 3.25)"
+                );
+                seed.executeUpdate();
+            }
         } catch(SQLException e){
             throw new DbException(e.getMessage());
         } finally {
             DB.closeStatement(seed);
+            // rs e check ja foram fechados acima em caso de sucesso; garanta fechamento tambem em fluxos alternativos.
+            DB.closeResultSet(rs);
+            DB.closeStatement(check);
             DB.closeStatement(st);
         }
     }

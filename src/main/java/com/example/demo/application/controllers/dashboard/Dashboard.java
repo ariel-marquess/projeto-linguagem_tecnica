@@ -22,6 +22,11 @@ public class Dashboard {
     @FXML
     public ListView<Stocky> Lista;    // Lista de visualização dos produtos
 
+    private void atualizarLista(){
+        // busca os produtos do banco e os adiciona à lista
+        List<Stocky> produtos = stockyDao.allProdutos();
+        Lista.getItems().setAll(produtos);
+    }
 
     @FXML
     public void initialize() {
@@ -69,10 +74,8 @@ public class Dashboard {
                 }
             }
         });
+        atualizarLista();
 
-        // busca os produtos do banco e os adiciona à lista
-        List<Stocky> produtos = stockyDao.allProdutos();
-        Lista.getItems().setAll(produtos);
     }
 
     public void cadastrar() throws IOException {
@@ -83,8 +86,10 @@ public class Dashboard {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.show();
-
+        // showAndWait bloqueia ate fechar a janela de cadastro
+        stage.showAndWait();
+        // atualiza a lista apos fechar o cadastro para refletir os novos produtos
+        atualizarLista();
     }
 
     public void adicionar() {

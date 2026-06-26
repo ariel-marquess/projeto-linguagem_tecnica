@@ -10,7 +10,6 @@ public class DaoFactory {
         StockyDao dao = new StockyDaoJDBC(DB.getConnection());
 
         // Ao criar a DAO, ja garantimos que a tabela existe e possui dados iniciais.
-        dao.createStocky();
         return dao;
     }
 }
