@@ -1,15 +1,50 @@
 package com.example.demo.application.controllers.dashboard;
 
+import com.example.demo.dao.DaoFactory;
+import com.example.demo.dao.StockyDao;
+import com.example.demo.models.Stocky;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
+import java.util.List;
+
 public class Dashboard {
-    public ListView Lista;    // Lista de visualização dos produtos
+
+    private StockyDao stockyDao;
+
+    @FXML
+    public ListView<Stocky> Lista;    // Lista de visualização dos produtos
+
 
     @FXML
     public void initialize() {
-        // Quando a tela for carregada, deve carregar os produtos do estoque na lista de visualização (veja como está feito no design do Figma para uma melhor disposição do conteúdo).
+        // quando a tela for carregada, carrega os produtos do estoque na lista de visualização
+        stockyDao = DaoFactory.createStockyDao();
+        List<Stocky> produtos = stockyDao.allProdutos();
+        Lista.getItems().setAll(produtos);
+        Lista.setCellFactory(param -> new javafx.scene.control.ListCell<Stocky>() {
+
+            @Override
+            protected void updateItem(Stocky item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    // formata a string para alinhar como uma tabela
+                    String formattedText = String.format("%-8s %-30s %10d",
+                            item.getId(),
+                            item.getNome(),
+                            item.getQuantidade());
+                    setText(formattedText);
+
+                    // Define uma fonte monoespaçada para garantir o alinhamento
+                    setStyle("-fx-font-family: 'monospace';");
+                }
+            }
+        });
     }
 
     public void cadastrar() {
