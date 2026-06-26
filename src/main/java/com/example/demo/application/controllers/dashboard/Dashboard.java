@@ -4,10 +4,15 @@ import com.example.demo.dao.DaoFactory;
 import com.example.demo.dao.StockyDao;
 import com.example.demo.models.Stocky;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Dashboard {
@@ -70,8 +75,16 @@ public class Dashboard {
         Lista.getItems().setAll(produtos);
     }
 
-    public void cadastrar() {
-        // Deve abrir a tela de cadastro de produtos
+    public void cadastrar() throws IOException {
+        // abre a tela de cadastro de produtos
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/dashboard/tools/register-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+
     }
 
     public void adicionar() {
@@ -87,7 +100,16 @@ public class Dashboard {
         // Essa está referenciada pela classe Check na pasta check
     }
 
-    public void sair() {
-        // Deve sair do dashboard e retornas para a tela de login
+    public void sair() throws IOException {
+        // sai do dashboard e retorna para a tela de login escondendo o dashboard
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/login/log-view.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+        Lista.getScene().getWindow().hide();
+
     }
 }
