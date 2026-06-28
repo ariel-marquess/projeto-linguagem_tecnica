@@ -4,10 +4,15 @@ import com.example.demo.dao.DaoFactory;
 import com.example.demo.dao.StockyDao;
 import com.example.demo.models.Stocky;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Dashboard {
@@ -17,6 +22,11 @@ public class Dashboard {
     @FXML
     public ListView<Stocky> Lista;    // Lista de visualização dos produtos
 
+    private void atualizarLista(){
+        // busca os produtos do banco e os adiciona à lista
+        List<Stocky> produtos = stockyDao.allProdutos();
+        Lista.getItems().setAll(produtos);
+    }
 
     @FXML
     public void initialize() {
@@ -55,7 +65,7 @@ public class Dashboard {
                     setGraphic(null); // Não mostra nada para células vazias.
                 } else {
                     // Para células com dados, define o texto de cada "coluna".
-                    codigo.setText(String.valueOf(item.getId()));
+                    codigo.setText(String.format("%04d", item.getId()));
                     produto.setText(item.getNome());
                     quantidade.setText(String.valueOf(item.getQuantidade()));
 
@@ -64,30 +74,70 @@ public class Dashboard {
                 }
             }
         });
+        atualizarLista();
 
-        // busca os produtos do banco e os adiciona à lista
-        List<Stocky> produtos = stockyDao.allProdutos();
-        Lista.getItems().setAll(produtos);
     }
 
-    public void cadastrar() {
-        // Deve abrir a tela de cadastro de produtos
+    public void cadastrar() throws IOException {
+        // abre a tela de cadastro de produtos
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/dashboard/tools/register-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        // bloqueia ate fechar a janela de cadastro
+        stage.showAndWait();
+        // atualiza a lista apos fechar o cadastro pra mostrar os novos produtos
+        atualizarLista();
     }
 
-    public void adicionar() {
+    public void adicionar() throws IOException {
         // Deve abrir a tela de adicionar produtos
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/dashboard/tools/add-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.showAndWait();
+        atualizarLista();
+
     }
 
-    public void remover() {
+    public void remover() throws IOException{
         // Deve abrir a tela de remover produtos
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/dashboard/tools/remove-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.showAndWait();
+        atualizarLista();
+
     }
 
-    public void verificar() {
+    public void verificar() throws IOException{
         // Deve abrir a tela de verificar produtos
         // Essa está referenciada pela classe Check na pasta check
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/dashboard/tools/check/check-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.showAndWait();
+        atualizarLista();
     }
 
-    public void sair() {
-        // Deve sair do dashboard e retornas para a tela de login
+    public void sair() throws IOException {
+        // sai do dashboard e retorna para a tela de login escondendo o dashboard
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/login/log-view.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+        Lista.getScene().getWindow().hide();
+
     }
 }

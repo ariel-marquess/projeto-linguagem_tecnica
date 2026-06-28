@@ -1,21 +1,31 @@
 package com.example.demo.application.controllers.dashboard.tools.check;
 
+import com.example.demo.dao.StockyDao;
+import com.example.demo.models.Stocky;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class RemoveItem {
+    @FXML
     public Label nomeProduto;
 
-    @FXML
-    public void initialize() {
-        // Deve carregar o nome do produto selecionado na tela de check.
+    private StockyDao stockyDao;
+    private Stocky produtoParaRemover;
+
+    public void setProduto(Stocky produto, StockyDao dao) {
+        this.produtoParaRemover = produto;
+        this.stockyDao = dao;
+        nomeProduto.setText(produto.getNome());
     }
 
     public void confirmar() {
-        // Deve remover o produto do estoque.
+        if (produtoParaRemover != null && stockyDao != null) {
+            stockyDao.deleteById(produtoParaRemover.getId());
+        }
+        cancelar(); // fecha a janela após a remoção
     }
 
     public void cancelar() {
-        // Deve voltar para a tela de check.
+        nomeProduto.getScene().getWindow().hide();
     }
 }
